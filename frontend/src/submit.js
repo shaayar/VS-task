@@ -29,7 +29,11 @@ export const SubmitButton = () => {
                 throw new Error('The backend could not parse this pipeline.');
             }
 
-            setResult(await response.json());
+            const backendResult = await response.json();
+            setResult(backendResult);
+            alert(
+                `Pipeline analysis:\nNodes: ${backendResult.num_nodes}\nEdges: ${backendResult.num_edges}\nDAG: ${backendResult.is_dag ? 'Yes' : 'No'}`
+            );
         } catch (submitError) {
             setError(submitError.message || 'Unable to submit the pipeline.');
         } finally {
