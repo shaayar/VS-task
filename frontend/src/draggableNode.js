@@ -1,6 +1,6 @@
 // draggableNode.js
 
-export const DraggableNode = ({ type, label }) => {
+export const DraggableNode = ({ type, label, icon, subtitle }) => {
     const onDragStart = (event, nodeType) => {
       const appData = { nodeType }
       event.target.style.cursor = 'grabbing';
@@ -14,9 +14,12 @@ export const DraggableNode = ({ type, label }) => {
         onDragStart={(event) => onDragStart(event, type)}
         onDragEnd={(event) => (event.target.style.cursor = 'grab')}
         draggable
-      >
-          <span className="draggable-node-mark">{label.slice(0, 2).toUpperCase()}</span>
-          <span style={{ color: '#fff' }}>{label}</span>
+          >
+          <span className="draggable-node-mark">{icon || label.slice(0, 2).toUpperCase()}</span>
+          <span className="draggable-node-copy">
+            <strong>{label}</strong>
+            {subtitle && <small>{subtitle}</small>}
+          </span>
       </div>
     );
   };

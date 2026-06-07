@@ -117,9 +117,24 @@ export const PipelineUI = () => {
                 snapToGrid
                 connectionLineType='smoothstep'
             >
-                <Background color="#273247" gap={gridSize} />
+                <Background color="#20263a" gap={gridSize} />
+                {nodes.length === 0 && (
+                    <div className="canvas-empty-state">
+                        <span className="empty-state-mark">AI</span>
+                        <strong>Build AI Workflows</strong>
+                        <p>Drag nodes from the sidebar to begin</p>
+                    </div>
+                )}
                 <Controls />
-                <MiniMap />
+                <MiniMap
+                    className="workflow-minimap"
+                    maskColor="rgba(6, 8, 14, 0.68)"
+                    nodeColor="#8b5cf6"
+                    nodeStrokeColor="#c4b5fd"
+                    nodeBorderRadius={8}
+                    pannable
+                    zoomable
+                />
             </ReactFlow>
         </main>
         </>

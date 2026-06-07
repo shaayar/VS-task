@@ -24,8 +24,10 @@ export const TextNode = ({ id, data }) => {
       id={id}
       data={{ ...data, text }}
       title="Text"
+      icon="TXT"
       eyebrow="TEMPLATE"
       description="Use {{variableName}} to create dynamic inputs."
+      meta={`${variables.length} variable${variables.length === 1 ? '' : 's'} / 1 output`}
       className="text-node"
       style={{ width, minHeight }}
       fields={[

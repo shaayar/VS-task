@@ -2,9 +2,12 @@ export const nodeDefinitions = {
   customInput: {
     type: 'customInput',
     label: 'Input',
+    icon: 'IN',
+    subtitle: 'External value',
     title: 'Input',
     eyebrow: 'SOURCE',
     description: 'Receives a value from outside the pipeline.',
+    meta: '1 output',
     defaults: { inputName: 'input', inputType: 'Text' },
     fields: [
       { name: 'inputName', label: 'Name', defaultValue: 'input' },
@@ -24,9 +27,12 @@ export const nodeDefinitions = {
   llm: {
     type: 'llm',
     label: 'LLM',
+    icon: 'AI',
+    subtitle: 'Model call',
     title: 'LLM',
     eyebrow: 'MODEL',
     description: 'Combines system context and prompt content.',
+    meta: '2 inputs / 1 output',
     handles: [
       { type: 'target', position: 'left', id: 'system', style: { top: '36%' } },
       { type: 'target', position: 'left', id: 'prompt', style: { top: '68%' } },
@@ -36,9 +42,12 @@ export const nodeDefinitions = {
   customOutput: {
     type: 'customOutput',
     label: 'Output',
+    icon: 'OUT',
+    subtitle: 'Pipeline result',
     title: 'Output',
     eyebrow: 'RESULT',
     description: 'Publishes a pipeline result.',
+    meta: '1 input',
     defaults: { outputName: 'output', outputType: 'Text' },
     fields: [
       { name: 'outputName', label: 'Name', defaultValue: 'output' },
@@ -58,6 +67,8 @@ export const nodeDefinitions = {
   text: {
     type: 'text',
     label: 'Text',
+    icon: 'TXT',
+    subtitle: 'Template content',
     title: 'Text',
     eyebrow: 'TEMPLATE',
     defaults: { text: '{{input}}' },
@@ -65,9 +76,12 @@ export const nodeDefinitions = {
   api: {
     type: 'api',
     label: 'API',
+    icon: 'API',
+    subtitle: 'HTTP request',
     title: 'API Node',
     eyebrow: 'HTTP',
     description: 'Calls an external API endpoint.',
+    meta: 'request / response',
     defaults: { method: 'GET', endpoint: '/v1/resource' },
     fields: [
       {
@@ -91,9 +105,12 @@ export const nodeDefinitions = {
   database: {
     type: 'database',
     label: 'Database',
+    icon: 'DB',
+    subtitle: 'Structured data',
     title: 'Database Node',
     eyebrow: 'DATA',
     description: 'Reads or writes structured records.',
+    meta: 'query / rows',
     defaults: { operation: 'Query', table: 'customers' },
     fields: [
       {
@@ -117,9 +134,12 @@ export const nodeDefinitions = {
   prompt: {
     type: 'prompt',
     label: 'Prompt',
+    icon: 'PR',
+    subtitle: 'Reusable instruction',
     title: 'Prompt Node',
     eyebrow: 'TEXT',
     description: 'Defines reusable prompt instructions.',
+    meta: 'context / prompt',
     defaults: { tone: 'Concise', prompt: 'Summarize the input.' },
     fields: [
       { name: 'tone', label: 'Tone', defaultValue: 'Concise' },
@@ -139,9 +159,12 @@ export const nodeDefinitions = {
   condition: {
     type: 'condition',
     label: 'Condition',
+    icon: 'IF',
+    subtitle: 'Branch logic',
     title: 'Condition Node',
     eyebrow: 'LOGIC',
     description: 'Routes data based on a simple expression.',
+    meta: 'true / false',
     defaults: { expression: 'score > 0.8' },
     fields: [{ name: 'expression', label: 'When', defaultValue: 'score > 0.8' }],
     handles: [
@@ -153,9 +176,12 @@ export const nodeDefinitions = {
   webhook: {
     type: 'webhook',
     label: 'Webhook',
+    icon: 'WH',
+    subtitle: 'Event trigger',
     title: 'Webhook Node',
     eyebrow: 'EVENT',
     description: 'Starts or notifies a workflow via webhook.',
+    meta: 'payload / delivery',
     defaults: { eventName: 'pipeline.completed', secret: 'enabled' },
     fields: [
       { name: 'eventName', label: 'Event', defaultValue: 'pipeline.completed' },

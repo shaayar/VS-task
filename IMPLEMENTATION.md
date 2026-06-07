@@ -68,6 +68,22 @@ The app now uses a cohesive dark theme with:
 
 The visual direction is intentionally restrained: dark panels, subtle borders, clear hierarchy, and minimal decorative effects.
 
+## UI/UX Enhancements
+
+This focused enhancement pass refined the interface toward a production AI workflow-builder experience inspired by VectorShift, n8n, Langflow, Linear, Vercel, and Notion AI. The goal was not to redesign the application or change its architecture, but to make the existing React Flow experience feel more deliberate, usable, and review-ready.
+
+The node library sidebar now presents nodes as interactive palette cards instead of simple labels. Each card includes a compact icon treatment, a clear node name, and a short subtitle that explains the node's role before it is dragged onto the canvas. This makes the palette easier to scan and gives every node type a consistent visual language without adding a complex categorization system.
+
+The canvas now includes an empty state when no nodes are present. The message, "Build AI Workflows" with "Drag nodes from the sidebar to begin," gives first-time users immediate orientation while keeping the workspace clean. I chose a small dashed container and simple AI mark rather than an illustration because workflow builders should prioritize the canvas and avoid feeling like a marketing page.
+
+Node cards were refined through the existing `BaseNode` abstraction. Headers now support an icon plus title area, body content remains node-specific, and footers can show lightweight connection metadata such as "2 inputs / 1 output." This reinforces the workflow-component mental model while keeping the abstraction reusable. Handles were made larger and accented with a modern purple treatment so connection points are easier to discover on the dark canvas.
+
+The minimap was adjusted to blend into the dark theme with subtle borders, rounded corners, and node colors aligned to the purple accent. This keeps it useful as a navigation aid without feeling visually detached from the rest of the product.
+
+The pipeline analysis dialog was also refined. Instead of a flat alert-style result, it now separates node and edge counts from DAG status and uses "Valid" or "Invalid" language. This reads more like a production validation feature and gives users a short explanation of what the status means.
+
+The main tradeoff was staying intentionally restrained. I avoided glassmorphism, heavy gradients, new animation systems, and additional UI packages. The result is less flashy, but it is easier to maintain, fits the technical assessment scope, and keeps attention on building and validating workflows.
+
 ## Text Node Implementation Details
 
 The Text node now:
@@ -179,4 +195,3 @@ Completed checks:
 - `PYTHONPATH=/tmp/vshift-fastapi-deps python3 -c "from main import app; print(app.title)"`
 
 The sandbox environment could not bind uvicorn to localhost ports during verification, but the FastAPI app imports successfully and the pure backend analysis logic is tested.
-

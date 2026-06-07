@@ -3,8 +3,6 @@
 import { useState } from 'react';
 import { useStore } from './store';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || '';
-
 export const SubmitButton = () => {
     const nodes = useStore((state) => state.nodes);
     const edges = useStore((state) => state.edges);
@@ -17,7 +15,7 @@ export const SubmitButton = () => {
         setError('');
 
         try {
-            const response = await fetch(`${API_BASE_URL}/pipelines/parse`, {
+            const response = await fetch('http://localhost:8000/pipelines/parse', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,11 +27,7 @@ export const SubmitButton = () => {
                 throw new Error('The backend could not parse this pipeline.');
             }
 
-            const backendResult = await response.json();
-            setResult(backendResult);
-            alert(
-                `Pipeline analysis:\nNodes: ${backendResult.num_nodes}\nEdges: ${backendResult.num_edges}\nDAG: ${backendResult.is_dag ? 'Yes' : 'No'}`
-            );
+            setResult(await response.json());
         } catch (submitError) {
             setError(submitError.message || 'Unable to submit the pipeline.');
         } finally {
@@ -60,18 +54,25 @@ export const SubmitButton = () => {
                         {error ? (
                             <p className="result-error">{error}</p>
                         ) : (
-                            <div className="result-grid">
-                                <div>
+                            <div className="result-content">
+                                <div className="result-grid">
+                                    <div>
                                     <span>Nodes</span>
                                     <strong>{result.num_nodes}</strong>
-                                </div>
-                                <div>
+                                    </div>
+                                    <div>
                                     <span>Edges</span>
                                     <strong>{result.num_edges}</strong>
+                                    </div>
                                 </div>
-                                <div>
-                                    <span>DAG</span>
-                                    <strong>{result.is_dag ? 'Yes' : 'No'}</strong>
+                                <div className={`dag-status ${result.is_dag ? 'is-valid' : 'is-invalid'}`}>
+                                    <span>DAG Status</span>
+                                    <strong>{result.is_dag ? 'Valid' : 'Invalid'}</strong>
+                                    <p>
+                                        {result.is_dag
+                                            ? 'This pipeline can be evaluated without cycles.'
+                                            : 'This pipeline contains a cycle and needs a routing adjustment.'}
+                                    </p>
                                 </div>
                             </div>
                         )}

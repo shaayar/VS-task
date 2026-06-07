@@ -46,8 +46,10 @@ export const BaseNode = ({
   id,
   data = {},
   title,
+  icon,
   eyebrow,
   description,
+  meta,
   fields = [],
   handles = [],
   children,
@@ -70,8 +72,11 @@ export const BaseNode = ({
       ))}
 
       <div className="node-header">
-        {eyebrow && <span className="node-eyebrow">{eyebrow}</span>}
-        <span className="node-title">{title}</span>
+        {icon && <span className="node-icon">{icon}</span>}
+        <div className="node-heading-text">
+          {eyebrow && <span className="node-eyebrow">{eyebrow}</span>}
+          <span className="node-title">{title}</span>
+        </div>
       </div>
 
       {description && <p className="node-description">{description}</p>}
@@ -96,6 +101,8 @@ export const BaseNode = ({
       )}
 
       {children && <div className="node-body">{children}</div>}
+
+      {meta && <div className="node-footer">{meta}</div>}
     </div>
   );
 };
